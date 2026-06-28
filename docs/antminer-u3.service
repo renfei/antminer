@@ -1,0 +1,20 @@
+# /etc/systemd/system/antminer-u3.service
+[Unit]
+Description=Antminer U3 cgminer
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+PermissionsStartOnly=true
+User=renfei
+Group=dialout
+WorkingDirectory=/home/renfei/antminer
+ExecStartPre=/usr/local/sbin/u3-bind-cp210x.sh
+ExecStart=/home/renfei/antminer/start_miner.sh --text-only
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+
